@@ -1,0 +1,10 @@
+<div>
+	<!-- NASA API removed pagination so limiting results to 25 here -->
+	<ul ng-repeat="image in $ctrl.images | limitTo:25"> 
+		<li>
+			<img style="width: 30%" src="{{image.img_src}}">
+			<p>ID: {{image.id}}</p>
+			<p>Date: {{image.earth_date}}</p>
+		</li>
+	</ul>
+</div>
