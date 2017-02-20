@@ -1,6 +1,11 @@
 angular.module('marsRover')
 	.service('imageService', ['$http', function($http) {
-	  this.getImages = function(sol, page) {
-	    return $http.get('/images?sol=' + sol + '&page=' + page, {cache: true});
+	  this.getImages = (camera) => {
+	  	let config = {
+	  		camera: camera,
+	  		cache: true
+	  	}
+
+	    return $http.get('/images', {params: config});
 	  }
 	}])

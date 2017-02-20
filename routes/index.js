@@ -3,22 +3,26 @@ const router = express.Router();
 const request = require('request');
 
 router.get('/images', (req, res, next) => {
+	let qs = {
+		api_key: 'aDhqK88n3p3FcbHpL0M0WrbkBo1datDKk5puVrLY',
+		sol: 1,
+		camera: req.query.camera
+	}
+
+	if (req.query.camera == 'ALL') {
+		delete qs.camera;
+	}
+
   request({
   	method: 'GET',
-  	url: `https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos`,
-  	qs: {
-  		page: req.query.page,
-  		api_key: 'YnVJc28KZxxKGJt6Tw2IUM3d8CMez3YE1L4YiSH4',
-  		sol: req.query.sol,
-  		camera: 'PANCAM'
-  	},
+  	url: 'https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos',
+  	qs: qs,
   	json: true
   }, (err, response, body) => {
 		if (err) throw err;
-		console.log('body', body);
 
 		// Remove unnecessary info about rover
-		body.photos.forEach(function(photoObject) {
+		body.photos.forEach((photoObject) => {
 			delete photoObject.rover;
 		})
 

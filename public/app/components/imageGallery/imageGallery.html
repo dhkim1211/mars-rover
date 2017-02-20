@@ -1,10 +1,18 @@
-<div>
-	<!-- NASA API removed pagination so limiting results to 25 here -->
-	<ul ng-repeat="image in $ctrl.images | limitTo:25"> 
-		<li>
-			<img style="width: 30%" src="{{image.img_src}}">
-			<p>ID: {{image.id}}</p>
-			<p>Date: {{image.earth_date}}</p>
-		</li>
-	</ul>
+<div layout layout-align="center center">
+	<md-select ng-model="selectedCamera" placeholder="Select a Camera" ng-change="$ctrl.getCamerasImages(1, selectedCamera)" flex="30">
+	  <md-option ng-value="camera" ng-repeat="camera in $ctrl.cameras">{{camera}}</md-option>
+	</md-select>
 </div>
+
+<md-content infinite-scroll="$ctrl.getMoreImages($ctrl.page, selectedCamera)" layout="row" layout-wrap layout-align="center center">
+	<md-card hover ng-repeat="image in $ctrl.images track by $index" flex="45" flex-gt-sm="30" layout-align="center center" ng-cloak>
+		<a href="{{image.img_src}}" layout-align="center center">
+			<img src="{{image.img_src}}">
+		</a>
+		<p>{{image.camera.full_name}} ({{image.camera.name}})</p>
+		<p>{{image.earth_date}}</p>
+	</md-card>
+
+	<h3 ng-show="$ctrl.images.length < 1" >There are no images from the {{selectedCamera}} camera on this sol.</h3>
+
+</md-content>
