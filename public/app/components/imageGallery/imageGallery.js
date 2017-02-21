@@ -37,6 +37,7 @@ function imageGalleryController ($scope, imageService) {
 	    .success((data) =>{
 	      vm.allImages = data;
 
+      	// Since NASA API removed pagination, show only the first 25 images
 	    	for (let i = 0; i < 25; i++) {
 	    		vm.images.push(vm.allImages[i]);
 	    	}
