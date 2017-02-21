@@ -1,9 +1,9 @@
 # mars-rover
 
 Directions:
-Clone repository
-Run NPM Install
-Start app using 'npm start'
+- Clone repository
+- Run NPM Install
+- Start app using 'npm start'
 
 Notes:
 - NASA's API removed the pagination functionality so pagination is handled on the client-side
